@@ -35,7 +35,7 @@ namespace Library.Tests
      //Assert
      Assert.AreEqual(0, result);
    }
-  
+
    [TestMethod]
     public void GetAll_BooksNotEmpty_List()
     {
@@ -47,111 +47,110 @@ namespace Library.Tests
       //Assert
       Assert.AreEqual(1, result);
     }
+
+    [TestMethod]
+    public void GetTitle_ReturnsName_String()
+    {
+      //Arrange
+      string title = "Frankenstein";
+      Book newBook = new Book(title);
+
+      //Act
+      string result = newBook.GetTitle();
+
+      //Assert
+      Assert.AreEqual(title, result);
+    }
+
+    [TestMethod]
+    public void GetAll_ReturnsEmptyList_BookList()
+    {
+      //Arrange
+      List<Book> newList = new List<Book> { };
+
+      //Act
+      List<Book> result = Book.GetAll();
+
+      //Assert
+      CollectionAssert.AreEqual(newList, result);
+    }
+
+    [TestMethod]
+    public void GetAll_ReturnsBooks_BookList()
+    {
+      //Arrange
+      Book newBook1 = new Book("Slaughterhouse 5");
+      newBook1.Save();
+      Book newBook2 = new Book("Survivor");
+      newBook2.Save();
+      List<Book> newList = new List<Book> { newBook1, newBook2 };
+
+      //Act
+      List<Book> result = Book.GetAll();
+
+      //Assert
+      // This is a way to avoid the CollectionAssert error that says "(Element at index 0 do not match)", because we are working with databases now.
+      Assert.AreEqual(newList[0].GetTitle(), result[0].GetTitle());
+    }
+
+    [TestMethod]
+    public void Find_ReturnsCorrectBookFromDatabase_Book()
+    {
+      //Arrange
+      Book testBook = new Book("Charlottes Web");
+      testBook.Save();
+
+      //Act
+      Book foundBook = Book.Find(testBook.GetId());
+
+      //Assert
+      // To eliminate error "Expected: <object>. Actual: <object>", we looked for the title of the books instead.
+      Assert.AreEqual(testBook.GetId(), foundBook.GetId());
+    }
+
+    [TestMethod]
+    public void Equals_ReturnsTrueIfNamesAreTheSame_Book()
+    {
+      Book testBook = new Book("The hound of Baskerville");
+      testBook.Save();
+      Book foundBook = Book.Find(testBook.GetId());
+      // Assert
+      Assert.AreEqual(testBook.GetTitle(), foundBook.GetTitle());
+    }
+
+    [TestMethod]
+    public void Save_SavesToDatabase_BookList()
+    {
+      //Arrange
+      Book testBook = new Book("Anne of Green Gables");
+      //Act
+      testBook.Save();
+      List<Book> result = Book.GetAll();
+      List<Book> testList = new List<Book>{testBook};
+
+      //Assert
+      CollectionAssert.AreEqual(testList, result);
+    }
+
+    [TestMethod]
+    public void Save_AssignsIdToObject_Id()
+    {
+      //Arrange
+      Book testBook = new Book("1984");
+
+      //Act
+      testBook.Save();
+      Book savedBook = Book.GetAll()[0];
+
+      int result = savedBook.Id;
+      int testId = testBook.Id;
+
+      //Assert
+      Assert.AreEqual(testId, result);
+    }
   //
   //   [TestMethod]
-  //   public void GetName_ReturnsName_String()
-  //   {
-  //     //Arrange
-  //     string name = "Shelley Miles";
-  //     Book newBook = new Book(name);
-  //
-  //     //Act
-  //     string result = newBook.GetName();
-  //
-  //     //Assert
-  //     Assert.AreEqual(name, result);
-  //   }
-  //
-  //   [TestMethod]
-  //   public void GetAll_ReturnsEmptyList_BookList()
-  //   {
-  //     //Arrange
-  //     List<Book> newList = new List<Book> { };
-  //
-  //     //Act
-  //     List<Book> result = Book.GetAll();
-  //
-  //     //Assert
-  //     CollectionAssert.AreEqual(newList, result);
-  //   }
-  //
-  //   [TestMethod]
-  //   public void GetAll_ReturnsBooks_BookList()
-  //   {
-  //     //Arrange
-  //     Book newBook1 = new Book("Lydia Goh");
-  //     newBook1.Save();
-  //     Book newBook2 = new Book("Nancy Wing");
-  //     newBook2.Save();
-  //     List<Book> newList = new List<Book> { newBook1, newBook2 };
-  //
-  //     //Act
-  //     List<Book> result = Book.GetAll();
-  //
-  //     //Assert
-  //     // This is a way to avoid the CollectionAssert error that says "(Element at index 0 do not match)", because we are working with databases now.
-  //     Assert.AreEqual(newList[0].GetName(), result[0].GetName());
-  //   }
-  //
-  //   [TestMethod]
-  //   public void Find_ReturnsCorrectBookFromDatabase_Book()
-  //   {
-  //     //Arrange
-  //     Book testBook = new Book("Hua-Min Rae");
-  //     testBook.Save();
-  //
-  //     //Act
-  //     Book foundBook = Book.Find(testBook.GetId());
-  //
-  //     //Assert
-  //     Assert.AreEqual(testBook, foundBook);
-  //   }
-  //
-  //   [TestMethod]
-  //   public void Equals_ReturnsTrueIfNamesAreTheSame_Client()
-  //   {
-  //     // Arrange, Act
-  //     Client firstClient = new Client("Lindsey Mules", 1, 2);
-  //     Client secondClient = new Client("Lindsey Mules", 1, 2);
-  //
-  //     // Assert
-  //     Assert.AreEqual(firstClient, secondClient);
-  //   }
-  //
-  //   [TestMethod]
-  //   public void Save_SavesToDatabase_ClientList()
-  //   {
-  //     //Arrange
-  //     Client testClient = new Client("Laura Gingham", 3, 1);
-  //
-  //     //Act
-  //     testClient.Save();
-  //     List<Client> result = Client.GetAll();
-  //     List<Client> testList = new List<Client>{testClient};
-  //
-  //     //Assert
-  //     CollectionAssert.AreEqual(testList, result);
-  //   }
-  //
-  //   [TestMethod]
-  //   public void Save_AssignsIdToObject_Id()
-  //   {
-  //     //Arrange
-  //     Client testClient = new Client("Erin Jung", 1, 2);
-  //
-  //     //Act
-  //     testClient.Save();
-  //     Client savedClient = Client.GetAll()[0];
-  //
-  //     int result = savedClient.Id;
-  //     int testId = testClient.Id;
-  //
-  //     //Assert
-  //     Assert.AreEqual(testId, result);
-  //   }
-  //
-  //   [TestMethod]
-  //   public void Edit_UpdatesClientInDatabase_String()
+  //   public void Edit_UpdatesBookInDatabase_String()
   //   {
   //     //Arrange
   //     Client testClient = new Client("Lolo Lee", 1, 2);

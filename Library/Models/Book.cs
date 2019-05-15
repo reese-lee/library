@@ -50,32 +50,32 @@ namespace Library.Models
       return _copies;
     }
 
-    // public static Book Find(int check)
-    // {
-    //   Book book = new Book();
-    //   MySqlConnection conn = DB.Connection();
-    //   conn.Open();
-    //   MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-    //   cmd.CommandText = @"SELECT * FROM book where id = "+check+";";
-    //   MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
-    //   //nested if in a while loop to eliminate an error that was saying "Read must be done first"
-    //   while(rdr.Read())
-    //   {
-    //     if(rdr.IsDBNull(0) == false)
-    //     {
-    //       book.SetId(rdr.GetInt32(0));
-    //       book.SetName(rdr.GetString(1));
-    //       book.SetDate(rdr.Getint(2));
-    //     }
-    //   }
-    //   conn.Close();
-    //   if (conn != null)
-    //   {
-    //     conn.Dispose();
-    //   }
-    //   return book;
-    // }
-    //
+    public static Book Find(int check)
+    {
+      Book book = new Book();
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM books where id = "+check+";";
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      //nested if in a while loop to eliminate an error that was saying "Read must be done first"
+      while(rdr.Read())
+      {
+        if(rdr.IsDBNull(0) == false)
+        {
+          book.SetId(rdr.GetInt32(0));
+          book.SetTitle(rdr.GetString(1));
+          // book.SetCopies(rdr.Getint(2));
+        }
+      }
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      return book;
+    }
+
     public static List<Book> GetAll()
     {
       List<Book> allBooks = new List<Book> {};
@@ -142,6 +142,7 @@ namespace Library.Models
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
       cmd.CommandText = @"INSERT INTO `books` (`title`) VALUES ('"+_title+"');";
       cmd.ExecuteNonQuery();
+      _id = (int) cmd.LastInsertedId;
       conn.Close();
       if (conn != null)
       {
@@ -176,6 +177,21 @@ namespace Library.Models
     //     conn.Dispose();
     //   }
     // }
+
+    public override bool Equals(System.Object otherBook)
+    {
+      if (!(otherBook is Book))
+      {
+        return false;
+      }
+      else
+      {
+         Book newBook = (Book) otherBook;
+         bool idEquality = this.GetId() == newBook.GetId();
+         bool descriptionEquality = this.GetTitle() == newBook.GetTitle();
+         return (idEquality && descriptionEquality);
+       }
+    }
 
   }
 }
