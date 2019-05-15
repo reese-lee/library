@@ -6,7 +6,7 @@ using System;
 namespace Library.Tests
 {
   [TestClass]
-  public class LibraryTest : IDisposable
+  public class BookTest : IDisposable
   {
 
     public void Dispose()
@@ -14,7 +14,7 @@ namespace Library.Tests
       Book.ClearAll();
     }
 
-    public LibraryTest()
+    public BookTest()
     {
       DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=library_test;";
     }
