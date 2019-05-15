@@ -163,6 +163,20 @@ namespace Library.Tests
       Assert.AreEqual(secondName, result);
     }
 
+    [TestMethod]
+    public void Delete_DeletesCorrectValue()
+    {
+      Author testAuthor = new Author("Dennis Lehane");
+      testAuthor.Save();
+      Author testAuthor2 = new Author("Jonathan Krakauer");
+      testAuthor2.Save();
+      testAuthor2.Delete();
+
+      List<Author> testList = new List<Author> {testAuthor};
+      List<Author> result = Author.GetAll();
+
+      CollectionAssert.AreEqual(testList, result);
+    }
     // [TestMethod]
     // public void GetStylistId_ReturnsAuthorsParentStylistId_Int()
     // {
