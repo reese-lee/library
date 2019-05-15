@@ -16,6 +16,11 @@
       <input id="author" name="author" type="text">
       <button type="submit">Add this book</button>
     </form>
+    Search for a book to update or delete:
+    <form action="/librarian/search/book{id}" method="post">
+      <label for="search"></label>
+      <input type="search" name="search">
+    </form>
   <a href="/">Back to home</a>
   <a href="/librarian/search">Search for a book</a>
   <a href="/books">View current selection of books</a>

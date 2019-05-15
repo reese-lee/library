@@ -113,28 +113,42 @@ namespace Library.Models
        conn.Dispose();
       }
     }
-    //
-    //
-    // public List<int> GetBooksForDoctor()
-    // {
-    //   List<int> allBooks = new List<int> {};
-    //   MySqlConnection conn = DB.Connection();
-    //   conn.Open();
-    //   MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-    //   cmd.CommandText = @"SELECT * FROM `assignment` WHERE `book_id` = "+_id+";";
-    //   MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
-    //   while(rdr.Read())
-    //   {
-    //     allBooks.Add(rdr.GetInt32(2));
-    //   }
-    //   conn.Close();
-    //   if (conn != null)
-    //   {
-    //     conn.Dispose();
-    //   }
-    //   return allBooks;
-    // }
-    //
+
+    //check if book exists
+    public static Book findBook(string search)
+    {
+      List<Book> allBooks = Book.GetAll();
+      foreach(Book book in allBooks)
+      {
+        if(book.GetTitle() == search)
+        {
+          return book;
+        }
+      }
+      Book uselessBook = new Book("");
+      return uselessBook;
+    }
+
+    public List<int> GetBooksForDoctor()
+    {
+      List<int> allBooks = new List<int> {};
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM `assignment` WHERE `book_id` = "+_id+";";
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while(rdr.Read())
+      {
+        allBooks.Add(rdr.GetInt32(2));
+      }
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      return allBooks;
+    }
+
     public void Save()
     {
       MySqlConnection conn = DB.Connection();
