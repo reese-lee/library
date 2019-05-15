@@ -149,20 +149,20 @@ namespace Library.Models
       }
     }
 
-    // public void Update(string field, string change)
-    // {
-    //   MySqlConnection conn = DB.Connection();
-    //   conn.Open();
-    //   MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-    //   cmd.CommandText = @"UPDATE `books` SET `"+field+"` = '"+change+"' WHERE `books`.`id` = "+_id+";";
-    //   cmd.ExecuteNonQuery();
-    //   conn.Close();
-    //   if (conn != null)
-    //   {
-    //     conn.Dispose();
-    //   }
-    // }
-    // //
+    public void Update(string field, string change)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"UPDATE `authors` SET `"+field+"` = '"+change+"' WHERE `authors`.`id` = "+_id+";";
+      cmd.ExecuteNonQuery();
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+    }
+    //
     // public void Delete()
     // {
     //   MySqlConnection conn = DB.Connection();

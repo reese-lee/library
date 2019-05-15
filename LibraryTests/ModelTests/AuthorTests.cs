@@ -105,66 +105,66 @@ namespace Library.Tests
       //Assert
       Assert.AreEqual(testAuthor.GetId(), foundAuthor.GetId());
     }
-  //
-  //   [TestMethod]
-  //   public void Equals_ReturnsTrueIfNamesAreTheSame_Book()
-  //   {
-  //     Book testBook = new Book("The hound of Baskerville");
-  //     testBook.Save();
-  //     Book foundBook = Book.Find(testBook.GetId());
-  //     // Assert
-  //     Assert.AreEqual(testBook.GetTitle(), foundBook.GetTitle());
-  //   }
-  //
-  //   [TestMethod]
-  //   public void Save_SavesToDatabase_BookList()
-  //   {
-  //     //Arrange
-  //     Book testBook = new Book("Anne of Green Gables");
-  //     //Act
-  //     testBook.Save();
-  //     List<Book> result = Book.GetAll();
-  //     List<Book> testList = new List<Book>{testBook};
-  //
-  //     //Assert
-  //     CollectionAssert.AreEqual(testList, result);
-  //   }
-  //
-  //   [TestMethod]
-  //   public void Save_AssignsIdToObject_Id()
-  //   {
-  //     //Arrange
-  //     Book testBook = new Book("1984");
-  //
-  //     //Act
-  //     testBook.Save();
-  //     Book savedBook = Book.GetAll()[0];
-  //
-  //     int result = savedBook.GetId();
-  //     int testId = testBook.GetId();
-  //
-  //     //Assert
-  //     Assert.AreEqual(testId, result);
-  //   }
-  //
-  //   [TestMethod]
-  //   public void Update_UpdatesBookInDatabase_String()
-  //   {
-  //     //Arrange
-  //     Book testBook = new Book("The Alchemist");
-  //     testBook.Save();
-  //     string secondName = "The Zahir";
-  //
-  //     //Act
-  //     testBook.Update("title", secondName);
-  //     string result = Book.Find(testBook.GetId()).GetTitle();
-  //
-  //     //Assert
-  //     Assert.AreEqual(secondName, result);
-  //   }
+
+    [TestMethod]
+    public void Equals_ReturnsTrueIfNamesAreTheSame_Author()
+    {
+      Author testAuthor = new Author("Jonathan Safran Foer");
+      testAuthor.Save();
+      Author foundAuthor = Author.Find(testAuthor.GetId());
+      // Assert
+      Assert.AreEqual(testAuthor.GetName(), foundAuthor.GetName());
+    }
+
+    [TestMethod]
+    public void Save_SavesToDatabase_AuthorList()
+    {
+      //Arrange
+      Author testAuthor = new Author("Tom Clancy");
+      //Act
+      testAuthor.Save();
+      List<Author> result = Author.GetAll();
+      List<Author> testList = new List<Author>{testAuthor};
+
+      //Assert
+      CollectionAssert.AreEqual(testList, result);
+    }
+
+    [TestMethod]
+    public void Save_AssignsIdToObject_Id()
+    {
+      //Arrange
+      Author testAuthor = new Author("1984");
+
+      //Act
+      testAuthor.Save();
+      Author savedAuthor = Author.GetAll()[0];
+
+      int result = savedAuthor.GetId();
+      int testId = testAuthor.GetId();
+
+      //Assert
+      Assert.AreEqual(testId, result);
+    }
+
+    [TestMethod]
+    public void Update_UpdatesAuthorInDatabase_String()
+    {
+      //Arrange
+      Author testAuthor = new Author("Dennis Lehane");
+      testAuthor.Save();
+      string secondName = "Jonathan Krakauer";
+
+      //Act
+      testAuthor.Update("name", secondName);
+      string result = Author.Find(testAuthor.GetId()).GetName();
+
+      //Assert
+      Assert.AreEqual(secondName, result);
+    }
 
     // [TestMethod]
-    // public void GetStylistId_ReturnsBooksParentStylistId_Int()
+    // public void GetStylistId_ReturnsAuthorsParentStylistId_Int()
     // {
     //   //Arrange
     //   Stylist newStylist = new Stylist("Sheila Moore", "Hair dying", 0);
