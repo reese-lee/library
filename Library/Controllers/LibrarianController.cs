@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Library.Models;
 
 namespace Library.Controllers
 {
@@ -11,6 +12,22 @@ namespace Library.Controllers
        return View();
      }
 
-     //[HttpGet("/librarian/books/show")] with update/delete/cancel
+     [HttpPost("/librarian")]
+     public ActionResult Index(string title, string author)
+     {
+       Book newBook = new Book(title);
+       Author newAuthor = new Author(author);
+       newBook.Save();
+       newAuthor.Save();
+       return RedirectToAction();
+     }
+
+     // page where librarian can update/delete book
+     // [HttpGet("/librarian/books/show")]
+     // public ActionResult Show()
+     // {
+     //   List<Book>
+     // }
+
    }
 }

@@ -4,12 +4,15 @@
     <meta charset="utf-8">
     <title>Reese's Book-Pieces</title>
     <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
-    <link rel='stylesheet' href='~/css/styles.css'
+    <link rel='stylesheet' href='~/css/styles.css'>
   </head>
   <body>
-    @foreach(Book book in something)
+    <h1>Current selection of books:</h1>
+    <label for="search">Search by author or book, or pick a book from the list below:</label>
+    <input id="search" name="search" type="text">
+    @foreach(var book in Model)
     {
-      <li>book</li>
+      <li><a href='/books/@book.GetId()'>@book.GetTitle()</a></li>
     }
   </body>
 </html>
