@@ -142,42 +142,42 @@ namespace Library.Tests
       testBook.Save();
       Book savedBook = Book.GetAll()[0];
 
-      int result = savedBook.Id;
-      int testId = testBook.Id;
+      int result = savedBook.GetId();
+      int testId = testBook.GetId();
 
       //Assert
       Assert.AreEqual(testId, result);
     }
-  //
-  //   [TestMethod]
-  //   public void Edit_UpdatesBookInDatabase_String()
-  //   {
-  //     //Arrange
-  //     Client testClient = new Client("Lolo Lee", 1, 2);
-  //     testClient.Save();
-  //     string secondName = "Lola Lee";
-  //
-  //     //Act
-  //     testClient.Edit(secondName);
-  //     string result = Client.Find(testClient.Id).Name;
-  //
-  //     //Assert
-  //     Assert.AreEqual(secondName, result);
-  //   }
-  //
-  //   [TestMethod]
-  //   public void GetStylistId_ReturnsClientsParentStylistId_Int()
-  //   {
-  //     //Arrange
-  //     Stylist newStylist = new Stylist("Sheila Moore", "Hair dying", 0);
-  //     Client newClient = new Client("Wallace Tan", newStylist.Id, 1);
-  //
-  //     //Act
-  //     int result = newClient.StylistId;
-  //
-  //     //Assert
-  //     Assert.AreEqual(newStylist.Id, result);
-  //   }
+
+    [TestMethod]
+    public void Update_UpdatesBookInDatabase_String()
+    {
+      //Arrange
+      Book testBook = new Book("The Alchemist");
+      testBook.Save();
+      string secondName = "The Zahir";
+
+      //Act
+      testBook.Update("title", secondName);
+      string result = Book.Find(testBook.GetId()).GetTitle();
+
+      //Assert
+      Assert.AreEqual(secondName, result);
+    }
+
+    // [TestMethod]
+    // public void GetStylistId_ReturnsBooksParentStylistId_Int()
+    // {
+    //   //Arrange
+    //   Stylist newStylist = new Stylist("Sheila Moore", "Hair dying", 0);
+    //   Book newBook = new Book("Wallace Tan", newStylist.Id, 1);
+    //
+    //   //Act
+    //   int result = newBook.StylistId;
+    //
+    //   //Assert
+    //   Assert.AreEqual(newStylist.Id, result);
+    // }
 
   }
 }
