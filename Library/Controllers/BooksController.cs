@@ -36,14 +36,14 @@ namespace Library.Controllers
      }
 
      [HttpPost("/books/{bookId}")]
-     public ActionResult Show(int bookId, int authorId)
+     public ActionResult Show(int bookId, string authorId)
      {
+       int newAuthorId = int.Parse(authorId);
        List<Book> allBooks = Book.GetAll();
        Book thisBook = Book.Find(bookId);
-       Author thisAuthor = Author.Find(authorId);
+       List<Author> allAuthors = Author.GetAll();
+       Author thisAuthor = Author.Find(newAuthorId);
        thisAuthor.AddAuthorToBook(thisBook);
-       Console.WriteLine(thisAuthor.GetId());
-       Console.WriteLine(thisAuthor.GetName());
        return View(thisBook);
      }
 

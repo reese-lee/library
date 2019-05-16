@@ -16,7 +16,8 @@
   <select name="authorId">
     @foreach(Author author in Author.GetAll())
     {
-      <option value="author.GetId()">@author.GetName()</option>
+      <option value="@author.GetId()">@author.GetName()</option>
+
     }
   </select>
   <button type="submit" name="button">Update</button>
