@@ -1,4 +1,4 @@
-@* <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -7,22 +7,8 @@
     <link rel='stylesheet' href='~/css/styles.css'>
   </head>
   <body>
-    Add a book:
-    <form action="/librarian" method="post">
-      <input id="" name="" type="hidden" value="@Model">
-      <label for="author">Add an author:</label>
-      <input id="author" name="author" type="text">
+    <h1>Authors Page</h1>
 
-      <button type="submit">Add this author</button>
-    </form>
-    Search for an author to update or delete:
-    <form action="/librarian/search/author{id}" method="post">
-      <label for="search"></label>
-      <input type="search" name="search">
-    </form>
-  <a href="/">Back to home</a>
-  <a href="/librarian/search">Search for a book</a>
-  <a href="/books">View current selection of books</a>
 
   </body>
-</html> *@
+</html>

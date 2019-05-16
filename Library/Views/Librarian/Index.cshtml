@@ -12,15 +12,13 @@
       <input id="" name="" type="hidden" value="@Model">
       <label for="title">Add a title:</label>
       <input id="title" name="title" type="text">
-
       <button type="submit">Add this book</button>
     </form>
 
-    <form action="/librarian" method="post">
+    <form action="/authors" method="post">
       <input id="" name="" type="hidden" value="@Model">
       <label for="author">Add an author:</label>
       <input id="author" name="author" type="text">
-
       <button type="submit">Add this author</button>
     </form>
 
@@ -28,13 +26,13 @@
     <form action="/librarian/search/book{id}" method="post">
       <label for="search"></label>
       <input type="search" name="search">
+      <button submit="btn-light">Search for a book</a></button>
     </form>
 
     <br>
     <br>
 
   <button class="btn-light"><a href="/">Back to home</a></button>
-  <button class="btn-light"><a href="/librarian/search">Search for a book</a></button>
   <button class="btn-light"><a href="/books">View current selection of titles</a></button>
   <button class="btn-light"><a href="/authors">View current selection of authors</a></button>
 

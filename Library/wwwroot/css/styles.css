@@ -9,10 +9,12 @@ body {
   /* margin-top: 100px; */
   padding: 15px;
   background-color: #FFFFFF;
+  max-width: 60%;
 }
 
 .libphoto {
-  margin-top: 60px;
+  margin: 60px 60px 60px 60px;
+  padding: 25px;
 }
 
 .btn-light {
