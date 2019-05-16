@@ -7,16 +7,16 @@
     <link rel='stylesheet' href='~/css/styles.css'>
   </head>
   <body>
-    Add a book:
+    Add a title or author here:
     <form action="/librarian" method="post">
       <input id="" name="" type="hidden" value="@Model">
       <label for="title">Add a title:</label>
       <input id="title" name="title" type="text">
-      <button type="submit">Add this book</button>
+      <button type="submit">Add this title</button>
     </form>
 
     <form action="/authors" method="post">
-      <input id="" name="" type="hidden" value="@Model">
+      @* <input id="" name="" type="hidden" value="@Model"> *@
       <label for="author">Add an author:</label>
       <input id="author" name="author" type="text">
       <button type="submit">Add this author</button>

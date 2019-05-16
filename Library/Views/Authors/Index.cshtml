@@ -1,3 +1,5 @@
+@using Library.Models;
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -8,7 +10,10 @@
   </head>
   <body>
     <h1>Authors Page</h1>
-
+    @foreach (Author author in Model)
+      {
+        <li>@author.GetName()</li>
+      }
 
   </body>
 </html>

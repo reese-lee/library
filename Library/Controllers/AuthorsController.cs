@@ -9,10 +9,28 @@ namespace Library.Models
      [HttpGet("/authors")]
      public ActionResult Index(string author)
      {
+       // Author newAuthor = new Author(author);
+       // newAuthor.Save();
+       List<Author> allAuthors = Author.GetAll();
+       return View(allAuthors);
+     }
+
+     // [HttpPost("/authors")]
+     // public ActionResult Index(string author)
+     // {
+     //   Author newAuthor = new Author(author);
+     //   newAuthor.Save();
+     //   List<Author> allAuthors = Author.GetAll();
+     //   return RedirectToAction(allAuthors);
+     // }
+
+     [HttpPost("/authors")]
+     public ActionResult Show(string author)
+     {
        Author newAuthor = new Author(author);
        newAuthor.Save();
-       List<Author> allAuthors = Author.GetAll();
        return View();
      }
+
    }
 }

@@ -1,3 +1,5 @@
+@using Library.Models;
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -7,8 +9,14 @@
   </head>
   <body>
 
-<p>book </p>
-<p>author</p>
+<p>Book: @Model.GetTitle() </p>
+<p>Add Author:</p>
+<select name="selectAuthor">
+  @foreach(Author author in Author.GetAll())
+  {
+    <option value="author.GetName()"></option>
+  }
+</select>
 
 @* book title *@
 
