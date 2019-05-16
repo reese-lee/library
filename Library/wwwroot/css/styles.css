@@ -1,0 +1,16 @@
+body {
+  background-image: linear-gradient(to right, #f4428f, #e5e110);
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.container {
+  color: #000000;
+  /* margin-top: 100px; */
+  padding: 15px;
+  background-color: #FFFFFF;
+}
+
+.libphoto {
+  margin-top: 60px;
+}

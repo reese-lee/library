@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+@* <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -10,22 +10,13 @@
     Add a book:
     <form action="/librarian" method="post">
       <input id="" name="" type="hidden" value="@Model">
-      <label for="title">Add a title:</label>
-      <input id="title" name="title" type="text">
-
-      <button type="submit">Add this book</button>
-    </form>
-
-    <form action="/librarian" method="post">
-      <input id="" name="" type="hidden" value="@Model">
       <label for="author">Add an author:</label>
       <input id="author" name="author" type="text">
 
       <button type="submit">Add this author</button>
     </form>
-
-    Search for a book or author to update or delete:
-    <form action="/librarian/search/book{id}" method="post">
+    Search for an author to update or delete:
+    <form action="/librarian/search/author{id}" method="post">
       <label for="search"></label>
       <input type="search" name="search">
     </form>
@@ -34,4 +25,4 @@
   <a href="/books">View current selection of books</a>
 
   </body>
-</html>
+</html> *@
