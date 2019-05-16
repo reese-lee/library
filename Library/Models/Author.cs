@@ -1,3 +1,4 @@
+
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 using System;
@@ -38,32 +39,30 @@ namespace Library.Models
     {
       _name = name;
     }
-//
-//     public void SetCopies(int copies)
-//     {
-//       _copies = copies;
-//     }
-//
-//     public int GetCopies()
-//     {
-//       return _copies;
-//     }
+    //
+    //     public void SetCopies(int copies)
+    //     {
+    //       _copies = copies;
+    //     }
+    //
+    //     public int GetCopies()
+    //     {
+    //       return _copies;
+    //     }
 
-  public void AddAuthorToBook(Book theBook)
-  {
-    MySqlConnection conn = DB.Connection();
-    conn.Open();
-    MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-    cmd.CommandText = @"INSERT INTO `books_authors` (`author_id`, `book_id`) VALUES ('"+theBook.GetId()+"',"+_id+");";
-    cmd.ExecuteNonQuery();
-    conn.Close();
-    if (conn != null)
+    public void AddAuthorToBook(Book theBook)
     {
-    conn.Dispose();
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"INSERT INTO `books_authors` (`book_id`, `author_id`) VALUES ('"+theBook.GetId()+"', "+_id+");";
+      cmd.ExecuteNonQuery();
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
     }
-  }
-
-
 
     public static Author Find(int check)
     {
@@ -91,7 +90,7 @@ namespace Library.Models
       return author;
     }
 
-// USE JOIN TABLE TO FIND BOOK BY AUTHOR
+    // USE JOIN TABLE TO FIND BOOK BY AUTHOR
     // public static Book findBook()
     // {
     //
@@ -132,7 +131,7 @@ namespace Library.Models
       conn.Close();
       if (conn != null)
       {
-       conn.Dispose();
+        conn.Dispose();
       }
     }
 
@@ -142,19 +141,23 @@ namespace Library.Models
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
       cmd.CommandText = @"SELECT books.* FROM authors
-        JOIN books_authors ON (authors.id = books_authors.author_id)
-        JOIN books ON (books_authors.book_id = books.id)
-        WHERE authors.id = @AuthorId;";
+      JOIN books_authors ON (authors.id = books_authors.author_id)
+      JOIN books ON (books_authors.book_id = books.id)
+      WHERE authors.id = @AuthorId;";
+      MySqlParameter authorIdParameter = new MySqlParameter();
       authorIdParameter.ParameterName = "@AuthorId";
-       authorIdParameter.Value = _id;
-       cmd.Parameters.Add(authorIdParameter);
-       MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
-       List<Book> books = new List<Book> {};
+      authorIdParameter.Value = _id;
+      cmd.Parameters.Add(authorIdParameter);
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      List<Book> books = new List<Book> {};
       while(rdr.Read())
       {
         // int bookId = rdr.GetInt32(0);
         // string bookTitle = rdr.GetString(1);
-        allAuthors.Add(rdr.GetInt32(2));
+        Book book = new Book();
+        book.SetId(rdr.GetInt32(0));
+        book.SetTitle(rdr.GetString(1));
+        books.Add(book);
       }
       conn.Close();
       if (conn != null)
@@ -215,11 +218,11 @@ namespace Library.Models
       }
       else
       {
-         Author newAuthor = (Author) otherAuthor;
-         bool idEquality = this.GetId() == newAuthor.GetId();
-         bool descriptionEquality = this.GetName() == newAuthor.GetName();
-         return (idEquality && descriptionEquality);
-       }
+        Author newAuthor = (Author) otherAuthor;
+        bool idEquality = this.GetId() == newAuthor.GetId();
+        bool descriptionEquality = this.GetName() == newAuthor.GetName();
+        return (idEquality && descriptionEquality);
+      }
     }
   }
 }

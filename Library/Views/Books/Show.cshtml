@@ -13,10 +13,10 @@
 <h3>@Model.GetTitle() </h3>
 <p>Add Author:</p>
 <form action="/books/@Model.GetId()" method="post">
-  <select name="selectAuthor">
+  <select name="authorId">
     @foreach(Author author in Author.GetAll())
     {
-      <option value="author">@author.GetName()</option>
+      <option value="author.GetId()">@author.GetName()</option>
     }
   </select>
   <button type="submit" name="button">Update</button>

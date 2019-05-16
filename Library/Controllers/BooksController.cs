@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Library.Models;
 using System.Collections.Generic;
+using System;
 
 namespace Library.Controllers
 {
@@ -35,11 +36,14 @@ namespace Library.Controllers
      }
 
      [HttpPost("/books/{bookId}")]
-     public ActionResult Show(int bookId, Author author)
+     public ActionResult Show(int bookId, int authorId)
      {
        List<Book> allBooks = Book.GetAll();
        Book thisBook = Book.Find(bookId);
-       author.AddAuthorToBook(thisBook);
+       Author thisAuthor = Author.Find(authorId);
+       thisAuthor.AddAuthorToBook(thisBook);
+       Console.WriteLine(thisAuthor.GetId());
+       Console.WriteLine(thisAuthor.GetName());
        return View(thisBook);
      }
 
