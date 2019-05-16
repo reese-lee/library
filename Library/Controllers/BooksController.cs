@@ -35,6 +35,7 @@ namespace Library.Controllers
        return View(thisBook);
      }
 
+     //authorId is a string because its value is stored as a string 
      [HttpPost("/books/{bookId}")]
      public ActionResult Show(int bookId, string authorId)
      {
