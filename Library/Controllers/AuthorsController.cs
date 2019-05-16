@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
-namespace Library.Controllers
+namespace Library.Models
 {
    public class AuthorsController : Controller
    {

@@ -14,3 +14,7 @@ body {
 .libphoto {
   margin-top: 60px;
 }
+
+.btn-light {
+  border-radius: 10px;
+}
