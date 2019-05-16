@@ -177,6 +177,17 @@ namespace Library.Tests
 
       CollectionAssert.AreEqual(testList, result);
     }
+
+    // [TestMethod]
+    // public void AddAuthorToBook_AddsAuthors()
+    // {
+    //   Author author = new Author();
+    //   Book book = new Book();
+    //   author.Save();
+    //   book.Save();
+    //   author.AddAuthorToBook(book);
+    //   List<Author> authorList = new List<
+    // }
     // [TestMethod]
     // public void GetStylistId_ReturnsAuthorsParentStylistId_Int()
     // {

@@ -50,6 +50,24 @@ namespace Library.Models
       return _copies;
     }
 
+    // public void AddAuthorToBook(Book theBook)
+    // {
+    //   MySqlConnection conn = DB.Connection();
+    //   conn.Open();
+    //   MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+    //   cmd.CommandText = @"SELECT * FROM books
+    //   JOIN books_authors ON (authors.Id = books_authors.author_id)
+    //   JOIN authors ON (books_authors.book_id = books.Id)
+    //   WHERE books.Id = @"+theBook.GetId()+";";
+    //   cmd.ExecuteNonQuery();
+    //   conn.Close();
+    //   if (conn != null)
+    //   {
+    //   conn.Dispose();
+    //   }
+    //
+    // }
+
     public static Book Find(int check)
     {
       Book book = new Book();

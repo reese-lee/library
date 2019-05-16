@@ -1,3 +1,5 @@
+@using Library.Models;
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -7,5 +9,35 @@
   </head>
   <body>
 
-  </body>
+
+<h3>@Model.GetTitle() </h3>
+<p>Add Author:</p>
+<form action="/books/@Model.GetId()" method="post">
+  <select name="selectAuthor">
+    @foreach(Author author in Author.GetAll())
+    {
+      <option value="author">@author.GetName()</option>
+    }
+  </select>
+  <button type="submit" name="button">Update</button>
+</form>
+<br><br>
+
+@* book title *@
+
+
+
+
+<button type="button" name="button" class="btn btn-dark">Delete Book</button>
+<button type="button" name="button" class="btn btn-dark"><a href="/books">Cancel</a></button>
+
+<div class="footer">
+  <a href="/" class="btn btn-dark">GO HOME</a>
+  <a href="/librarian" class="btn btn-dark">Back To Librarian Page</a>
+</div>
+@* <a href="/books">View list of books</a> *@
+
+
+
+</body>
 </html>

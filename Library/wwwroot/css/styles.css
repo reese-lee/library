@@ -20,3 +20,10 @@ body {
 .btn-light {
   border-radius: 10px;
 }
+
+.footer
+{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}

@@ -54,18 +54,16 @@ namespace Library.Models
     MySqlConnection conn = DB.Connection();
     conn.Open();
     MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-    cmd.CommandText = @"SELECT * FROM books
-    JOIN books_authors ON (authors.Id = books_authors.author_id)
-    JOIN authors ON (books_authors.book_id = books.Id)
-    WHERE books.Id = @"+theBook.GetId()+";";
+    cmd.CommandText = @"INSERT INTO `books_authors` (`author_id`, `book_id`) VALUES ('"+theBook.GetId()+"',"+_id+");";
     cmd.ExecuteNonQuery();
     conn.Close();
     if (conn != null)
     {
     conn.Dispose();
     }
-
   }
+
+
 
     public static Author Find(int check)
     {
@@ -137,27 +135,34 @@ namespace Library.Models
        conn.Dispose();
       }
     }
-    //
-    //
-    // public List<int> GetAuthorsForDoctor()
-    // {
-    //   List<int> allAuthors = new List<int> {};
-    //   MySqlConnection conn = DB.Connection();
-    //   conn.Open();
-    //   MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-    //   cmd.CommandText = @"SELECT * FROM `assignment` WHERE `book_id` = "+_id+";";
-    //   MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
-    //   while(rdr.Read())
-    //   {
-    //     allAuthors.Add(rdr.GetInt32(2));
-    //   }
-    //   conn.Close();
-    //   if (conn != null)
-    //   {
-    //     conn.Dispose();
-    //   }
-    //   return allAuthors;
-    // }
+
+    public List<Book> GetBooks()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT books.* FROM authors
+        JOIN books_authors ON (authors.id = books_authors.author_id)
+        JOIN books ON (books_authors.book_id = books.id)
+        WHERE authors.id = @AuthorId;";
+      authorIdParameter.ParameterName = "@AuthorId";
+       authorIdParameter.Value = _id;
+       cmd.Parameters.Add(authorIdParameter);
+       MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+       List<Book> books = new List<Book> {};
+      while(rdr.Read())
+      {
+        // int bookId = rdr.GetInt32(0);
+        // string bookTitle = rdr.GetString(1);
+        allAuthors.Add(rdr.GetInt32(2));
+      }
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      return books;
+    }
 
     public void Save()
     {

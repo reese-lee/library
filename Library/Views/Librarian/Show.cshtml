@@ -11,25 +11,30 @@
 
 <p>Book: @Model.GetTitle() </p>
 <p>Add Author:</p>
-<select name="selectAuthor">
-  @foreach(Author author in Author.GetAll())
-  {
-    <option value="author.GetName()"></option>
-  }
-</select>
+<form action="/books/{bookId}" method="post">
+  <select name="selectAuthor">
+    @foreach(Author author in Author.GetAll())
+    {
+      <option value="author">@author.GetName()</option>
+    }
+  </select>
+  <button type="submit" name="button">Update</button>
+</form>
+<br><br>
 
 @* book title *@
 
 
 
 
-<button type="button" name="button">Delete</button>
-<button type="button" name="button">Update</button>
-<button type="button" name="button">Cancel</button>
+<button type="button" name="button" class="btn btn-dark">Delete Book</button>
+<button type="button" name="button" class="btn btn-dark"><a href="/books">Cancel</a></button>
 
-<a href="/">GO HOME</a>
-<a href="/librarian">Back To Librarian Page</a>
-<a href="/books">View list of books</a>
+<div class="footer">
+  <a href="/" class="btn btn-dark">GO HOME</a>
+  <a href="/librarian" class="btn btn-dark">Back To Librarian Page</a>
+</div>
+@* <a href="/books">View list of books</a> *@
 
 
 
