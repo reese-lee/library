@@ -49,6 +49,24 @@ namespace Library.Models
 //       return _copies;
 //     }
 
+  public void AddAuthorToBook(Book theBook)
+  {
+    MySqlConnection conn = DB.Connection();
+    conn.Open();
+    MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+    cmd.CommandText = @"SELECT * FROM books
+    JOIN books_authors ON (authors.Id = books_authors.author_id)
+    JOIN authors ON (books_authors.book_id = books.Id)
+    WHERE books.Id = @"+theBook.GetId()+";";
+    cmd.ExecuteNonQuery();
+    conn.Close();
+    if (conn != null)
+    {
+    conn.Dispose();
+    }
+
+  }
+
     public static Author Find(int check)
     {
       Author author = new Author();
@@ -74,6 +92,13 @@ namespace Library.Models
       }
       return author;
     }
+
+// USE JOIN TABLE TO FIND BOOK BY AUTHOR
+    // public static Book findBook()
+    // {
+    //
+    // }
+
 
     public static List<Author> GetAll()
     {
@@ -191,6 +216,5 @@ namespace Library.Models
          return (idEquality && descriptionEquality);
        }
     }
-
   }
 }
